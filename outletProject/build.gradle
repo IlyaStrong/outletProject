@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.mysql:mysql-connector-j:8.0.32'
+}
+
+jar {
+    manifest() {
+        attributes 'Main-Class': 'outlet.RetrieveData'
+    }
+}
